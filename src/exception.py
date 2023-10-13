@@ -3,9 +3,11 @@ from src.logger import logging
 
 #Custom exception
 def error_message_detail (error,error_detail:sys):
-    _,_,exc_tb = error_detail.exc_infos() #Cette fonction renvoie un triplet contenant des informations sur l'exception actuellement traitée.
+    _,_,exc_tb = error_detail.exc_info()
+    #Cette fonction renvoie un triplet contenant des informations sur l'exception actuellement traitée.
 
-    file_name = exc_tb.tb_frame.f_code.co_filename #extraction du nom du fichier où l'exception s'est produite à partir de l'objet
+    file_name = exc_tb.tb_frame.f_code.co_filename
+    #extraction du nom du fichier où l'exception s'est produite à partir de l'objet
 
 
     '''Le nom du fichier où l'erreur s'est produite (file_name).
