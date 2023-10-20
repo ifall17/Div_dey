@@ -28,7 +28,7 @@ class ModelTrainer:
     def __init__(self):
         self.mod_train_conf = ModelTrainConfig()
 
-    def initiate_mod_train(self,train_array,test_array,prepro):
+    def initiate_mod_train(self,train_array,test_array):
         try:
             x_train,y_train,x_test,y_test = (
                 train_array[:, :-1],
@@ -84,7 +84,7 @@ class ModelTrainer:
 
             }
 
-            model_report: dict = evaluate_models(X_train=x_train, y_train=y_train, x_test=x_test, y_test=y_test,
+            model_report: dict = evaluate_models(X_train=x_train, y_train=y_train, X_test=x_test, y_test=y_test,
                                                  models=model, param=params)
 
             ## To get best model score from dict
@@ -99,10 +99,11 @@ class ModelTrainer:
 
             if best_model_score < 0.6:
                 raise CustomException("No best model found")
+
             logging.info(f"Meilleur modèle trouvé sur les ensembles de données d'apprentissage et de test")
 
             save_object(
-                file_path=self.model_trainer_config.trained_model_file_path,
+                file_path=self.mod_train_conf.model_trainer_file_path,
                 obj=best_model
             )
 
@@ -117,5 +118,6 @@ class ModelTrainer:
 
         except Exception as e:
             raise CustomException(e, sys)
+
 
 

@@ -10,7 +10,8 @@ from dataclasses import dataclass #on a pas besoin d'initialiser la classe avec 
 from src.components.data_tranformation import DataTransformation
 from src.components.data_tranformation import DataTransformationConfig
 
-
+from src.components.model_trainer import ModelTrainConfig
+from src.components.model_trainer import ModelTrainer
 @dataclass
 class DataIngestionConfig:
     """os.path.join('artifacts', 'train.csv'), la fonction os.path.join
@@ -59,6 +60,9 @@ if __name__=='__main__':
 
     data_transformation = DataTransformation()
     train_arr, test_arr, _ = data_transformation.initiate_dt_trans(train_data, test_data)
+
+    modeltrainer = ModelTrainer()
+    print(modeltrainer.initiate_mod_train(train_arr, test_arr))
 
 
 
